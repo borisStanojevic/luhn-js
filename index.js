@@ -4,7 +4,7 @@ const isValid = (creditCardNumber) => {
   if(!isString(creditCardNumber))
     throw Error("Credit card number must be a string.");
 
-  const potentialCheckDigit = parseInt(creditCardNumber[creditCardNumber.length - 1]);
+  const potentialCheckDigit = toNumber(creditCardNumber[creditCardNumber.length - 1]);
   const payload = [...creditCardNumber.slice(0, -1)];
   const checkDigit = calculateCheckDigit(payload);
 
@@ -20,7 +20,7 @@ const calculateCheckDigit = (payload) => {
 
   let isDigitSupposedToBeMultiplied = true;
   for (let i = payload.length - 1; i >= 0; i--) {
-    let digit = parseInt(payload[i], 10);
+    let digit = toNumber(payload[i]);
 
     let sum = digit;
 
@@ -32,6 +32,14 @@ const calculateCheckDigit = (payload) => {
   }
 
   return 10 - (totalSum % 10);
+}
+
+const toNumber = (value) => {
+  let number = Number(value);
+  if(Number.isNaN(number))
+    throw Error("Credit card number cannot contain non-numerical characters.");
+
+  return number;
 }
 
 const sumDigits = (number) => Math.floor(number / 10) + (number % 10);
