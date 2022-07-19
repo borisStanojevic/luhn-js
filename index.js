@@ -18,13 +18,13 @@ const calculateCheckDigit = (payload) => {
 	let isDigitSupposedToBeMultiplied = true;
 	for (let i = payload.length - 1; i >= 0; i--) {
 		let digit = parseInt(payload[i], 10);
-    
-    let sum = digit;
 
-		if (isDigitSupposedToBeMultiplied) 
-		  sum = sumDigits(digit * 2);
+		let sum = digit;
 
-    totalSum += sum;
+		if (isDigitSupposedToBeMultiplied)
+			sum = sumDigits(digit * 2);
+
+		totalSum += sum;
 		isDigitSupposedToBeMultiplied = !isDigitSupposedToBeMultiplied;
 	}
 
