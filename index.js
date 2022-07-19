@@ -34,6 +34,3 @@ const calculateCheckDigit = (payload) => {
 const sumDigits = (number) => Math.floor(number / 10) + (number % 10);
 
 console.log(isValid("4003600000000014"));
-
-const a = 8
-console.log(`${Math.floor(a / 10)} ${(a % 10)}`);
