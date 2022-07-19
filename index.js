@@ -2,6 +2,8 @@
 const isValid = (creditCardNumber) => {
   if (isNullish(creditCardNumber))
     throw Error("Credit card number cannot be null or undefined.");
+  if(!isString(creditCardNumber))
+    throw Error("Credit card number must be a string.");
 
   const potentialCheckDigit = parseInt(creditCardNumber[creditCardNumber.length - 1]);
   const payload = [...creditCardNumber.slice(0, -1)];
@@ -11,6 +13,8 @@ const isValid = (creditCardNumber) => {
 }
 
 const isNullish = (value) => value === null || value === undefined;
+
+const isString = (value) => typeof(value) === "string";
 
 const calculateCheckDigit = (payload) => {
   let totalSum = 0;
