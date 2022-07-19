@@ -1,4 +1,3 @@
-// Assume credit card number numeric
 const isValid = (creditCardNumber) => {
   if (isNullish(creditCardNumber))
     throw Error("Credit card number cannot be null or undefined.");
