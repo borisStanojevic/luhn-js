@@ -24,15 +24,11 @@ const calculateCheckDigit = (payload) => {
 			digit *= 2;
 
 			// Or foreach over digit string
-			if (digit > 10) {
-				const digitString = digit.toString();
-				const firstDigit = parseInt(digitString.charAt(0));
-				const secondDigit = parseInt(digitString.charAt(1));
-
-				sumOfDigits += (firstDigit + secondDigit);
-			} else {
+			if (digit > 10)
+				sumOfDigits += (Math.floor(digit / 10) + (digit % 10));
+			else
 				sumOfDigits += digit;
-			}
+
 		} else {
 			sumOfDigits += digit;
 		}
