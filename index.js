@@ -13,30 +13,27 @@ const isValid = (creditCardNumber) => {
 const isNullish = (value) => value === null || value === undefined;
 
 const calculateCheckDigit = (payload) => {
-	let sumOfDigits = 0;
+	let totalSum = 0;
 
 	let isDigitSupposedToBeMultiplied = true;
 	for (let i = payload.length - 1; i >= 0; i--) {
 		let digit = parseInt(payload[i], 10);
+    
+    let sum = digit;
 
+		if (isDigitSupposedToBeMultiplied) 
+		  sum = sumDigits(digit * 2);
 
-		if (isDigitSupposedToBeMultiplied) {
-			digit *= 2;
-
-			// Or foreach over digit string
-			if (digit > 10)
-				sumOfDigits += (Math.floor(digit / 10) + (digit % 10));
-			else
-				sumOfDigits += digit;
-
-		} else {
-			sumOfDigits += digit;
-		}
-
+    totalSum += sum;
 		isDigitSupposedToBeMultiplied = !isDigitSupposedToBeMultiplied;
 	}
 
-	return 10 - (sumOfDigits % 10);
+	return 10 - (totalSum % 10);
 }
 
+const sumDigits = (number) => Math.floor(number / 10) + (number % 10);
+
 console.log(isValid("4003600000000014"));
+
+const a = 8
+console.log(`${Math.floor(a / 10)} ${(a % 10)}`);
