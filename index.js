@@ -1,21 +1,21 @@
-const isValid = (creditCardNumber) => {
-  if (isNullish(creditCardNumber))
-    throw Error("Credit card number cannot be null or undefined.");
-  if(!isString(creditCardNumber))
-    throw Error("Credit card number must be a string.");
+const isValid = (creditCardNumber) => { // 2N -> O(N)
+  if (isNullish(creditCardNumber)) // 1
+    throw Error("Credit card number cannot be null or undefined."); // 1
+  if(!isString(creditCardNumber)) // 1
+    throw Error("Credit card number must be a string."); // 1
 
-  const potentialCheckDigit = toNumber(creditCardNumber[creditCardNumber.length - 1]);
-  const payload = [...creditCardNumber.slice(0, -1)];
-  const checkDigit = calculateCheckDigit(payload);
+  const potentialCheckDigit = toNumber(creditCardNumber[creditCardNumber.length - 1]); // 1
+  const payload = [...creditCardNumber.slice(0, -1)]; // N + (1)
+  const checkDigit = calculateCheckDigit(payload); // N
 
-  return potentialCheckDigit === checkDigit;
+  return potentialCheckDigit === checkDigit; // 1
 }
 
-const isNullish = (value) => value === null || value === undefined;
+const isNullish = (value) => value === null || value === undefined;  // 1
 
-const isString = (value) => typeof(value) === "string";
+const isString = (value) => typeof(value) === "string"; // 1
 
-const calculateCheckDigit = (payload) => {
+const calculateCheckDigit = (payload) => { // N
   let totalSum = 0;
 
   let isDigitSupposedToBeMultiplied = true;
@@ -34,7 +34,7 @@ const calculateCheckDigit = (payload) => {
   return 10 - (totalSum % 10);
 }
 
-const toNumber = (value) => {
+const toNumber = (value) => { // 1
   let number = Number(value);
   if(Number.isNaN(number))
     throw Error("Credit card number cannot contain non-numerical characters.");
@@ -42,6 +42,6 @@ const toNumber = (value) => {
   return number;
 }
 
-const sumDigits = (number) => Math.floor(number / 10) + (number % 10);
+const sumDigits = (number) => Math.floor(number / 10) + (number % 10); // 1
 
 console.log(isValid("4003600000000014"));
